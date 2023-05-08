@@ -1,19 +1,28 @@
 package nz.ac.auckland.se281;
 
+import java.util.ArrayList;
+import java.util.List;
 import nz.ac.auckland.se281.Main.Difficulty;
 
 public class Morra {
 
   private int roundNumber = 0;
-  private int finger;
-  private int sum;
+  public int fingerHuman;
+  public int sumHuman;
   private String player;
+  private String chosenLevel;
+  private List<Integer> playerFinger = new ArrayList<Integer>();
 
-  public Morra() {}
+  public Morra() {
+  }
 
   public void newGame(Difficulty difficulty, int pointsToWin, String[] options) {
     MessageCli.WELCOME_PLAYER.printMessage(options[0]);
     this.player = options[0];
+    this.chosenLevel = difficulty.name();
+    // Clear the playerFinger list and reset the round number for each new game.
+    playerFinger.clear();
+    roundNumber = 0;
   }
 
   public void play() {
@@ -32,21 +41,14 @@ public class Morra {
       // Split user input to integer array.
       String[] stringArray = input.split(" ");
 
-      // If the user input is not 2 numbers, immidiately ask for input again.
-
       try {
         double finger = Double.parseDouble(stringArray[0]);
         double sum = Double.parseDouble(stringArray[1]);
-        if (finger >= 1
-            && finger <= 5
-            && sum >= 1
-            && sum <= 10
-            && finger == (int) finger
-            && sum == (int) sum
-            && stringArray.length == 2) {
+        if (finger >= 1 && finger <= 5 && sum >= 1 && sum <= 10 && finger == (int) finger
+            && sum == (int) sum && stringArray.length == 2) {
           validNumber = true;
-          this.finger = (int) finger;
-          this.sum = (int) sum;
+          this.fingerHuman = (int) finger;
+          this.sumHuman = (int) sum;
         } else {
           MessageCli.INVALID_INPUT.printMessage();
         }
@@ -58,8 +60,31 @@ public class Morra {
       }
     }
 
-    MessageCli.PRINT_INFO_HAND.printMessage(player, String.valueOf(finger), String.valueOf(sum));
+    MessageCli.PRINT_INFO_HAND.printMessage(player, String.valueOf(fingerHuman),
+        String.valueOf(sumHuman));
+
+    playerFinger.add(fingerHuman);
+
+    // Create the difficulty level based on the user input and process strategy
+    // based on the
+    // difficulty level.
+    Level level = DifficultyFactory.createLevel(chosenLevel);
+    int[] result = level.process(playerFinger, roundNumber);
+
+    MessageCli.PRINT_INFO_HAND.printMessage("Jarvis", String.valueOf(result[0]),
+        String.valueOf(result[1]));
+
+    // Compare the result of the human and AI and print the outcome of the round.
+    if (result[0] + fingerHuman == sumHuman && result[0] + fingerHuman != result[1]) {
+      MessageCli.PRINT_OUTCOME_ROUND.printMessage("HUMAN_WINS");
+    } else if (result[0] + fingerHuman == result[1] && result[0] + fingerHuman != sumHuman) {
+      MessageCli.PRINT_OUTCOME_ROUND.printMessage("AI_WINS");
+    } else {
+      MessageCli.PRINT_OUTCOME_ROUND.printMessage("DRAW");
+    }
+
   }
 
-  public void showStats() {}
+  public void showStats() {
+  }
 }

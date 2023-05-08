@@ -1,6 +1,4 @@
 {
     "editor.formatOnSave": true,
-    "[java]": {
-        "editor.defaultFormatter": "josevseb.google-java-format-for-vs-code",
-    },
+    "google-java-format.executable": "/absolute/path/to/google-java-format",
 }
