@@ -4,20 +4,20 @@ import java.util.List;
 
 public class StrategyProcessor {
 
-    private Strategy strategy;
+  private Strategy strategy;
 
-    public StrategyProcessor(Strategy strategy) {
-        this.strategy = strategy;
-    }
+  public StrategyProcessor(Strategy strategy) {
+    this.strategy = strategy;
+  }
 
-    public void setStrategy(Strategy strategy) {
-        this.strategy = strategy;
+  public void setStrategy(Strategy strategy) {
+    this.strategy = strategy;
 
-    }
+  }
 
-    public int[] process(List<Integer> playerFingers) {
-        return strategy.processStrategy(playerFingers);
+  public int[] process(List<Integer> playerFingers) {
+    return strategy.processStrategy(playerFingers);
 
-    }
+  }
 
 }

@@ -4,6 +4,6 @@ import java.util.List;
 
 public interface Strategy {
 
-    public int[] processStrategy(List<Integer> list);
+  public int[] processStrategy(List<Integer> list);
 
 }

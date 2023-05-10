@@ -1,4 +1,6 @@
 {
     "editor.formatOnSave": true,
-    "google-java-format.executable": "/absolute/path/to/google-java-format",
+    "[java]": {
+        "editor.defaultFormatter": "redhat.java"
+    }
 }
