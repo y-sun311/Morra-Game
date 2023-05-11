@@ -2,6 +2,9 @@ package nz.ac.auckland.se281;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.print.DocFlavor.STRING;
+
 import nz.ac.auckland.se281.Main.Difficulty;
 
 public class Morra {
@@ -12,6 +15,10 @@ public class Morra {
   private String player;
   private String chosenLevel;
   private List<Integer> playerFinger = new ArrayList<Integer>();
+  private int gameStatus = 0;
+  private int pointsWin;
+  private int humanPoints;
+  private int aiPoints;
 
   public Morra() {
   }
@@ -23,9 +30,20 @@ public class Morra {
     // Clear the playerFinger list and reset the round number for each new game.
     playerFinger.clear();
     roundNumber = 0;
+    humanPoints = 0;
+    aiPoints = 0;
+    gameStatus = 1;
+    this.pointsWin = pointsToWin;
   }
 
   public void play() {
+
+    // Check if play is run before a new game created
+    if (gameStatus == 0) {
+      MessageCli.GAME_NOT_STARTED.printMessage();
+      return;
+    }
+
     // Initialise round number.
     roundNumber++;
     boolean validNumber = false;
@@ -77,14 +95,36 @@ public class Morra {
     // Compare the result of the human and AI and print the outcome of the round.
     if (result[0] + fingerHuman == sumHuman && result[0] + fingerHuman != result[1]) {
       MessageCli.PRINT_OUTCOME_ROUND.printMessage("HUMAN_WINS");
+      humanPoints++;
     } else if (result[0] + fingerHuman == result[1] && result[0] + fingerHuman != sumHuman) {
       MessageCli.PRINT_OUTCOME_ROUND.printMessage("AI_WINS");
+      aiPoints++;
     } else {
       MessageCli.PRINT_OUTCOME_ROUND.printMessage("DRAW");
+    }
+
+    if (humanPoints == pointsWin) {
+      MessageCli.END_GAME.printMessage(player, String.valueOf(roundNumber));
+      gameStatus = 0;
+
+    }
+
+    if (aiPoints == pointsWin) {
+      MessageCli.END_GAME.printMessage("Jarvis", String.valueOf(roundNumber));
+      gameStatus = 0;
     }
 
   }
 
   public void showStats() {
+    if (gameStatus == 0) {
+      MessageCli.GAME_NOT_STARTED.printMessage();
+      return;
+    }
+
+    MessageCli.PRINT_PLAYER_WINS.printMessage(player, String.valueOf(humanPoints),
+        String.valueOf(pointsWin - humanPoints));
+    MessageCli.PRINT_PLAYER_WINS.printMessage("Jarvis", String.valueOf(aiPoints), String.valueOf(pointsWin - aiPoints));
+
   }
 }
