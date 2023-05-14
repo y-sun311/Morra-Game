@@ -15,8 +15,8 @@ public class StrategyProcessor {
 
   }
 
-  public int[] process(List<Integer> playerFingers) {
-    return strategy.processStrategy(playerFingers);
+  public int[] process(List<Integer> playerFingerPlayed) {
+    return strategy.processStrategy(playerFingerPlayed);
 
   }
 

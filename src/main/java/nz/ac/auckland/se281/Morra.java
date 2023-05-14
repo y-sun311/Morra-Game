@@ -2,9 +2,6 @@ package nz.ac.auckland.se281;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.print.DocFlavor.STRING;
-
 import nz.ac.auckland.se281.Main.Difficulty;
 
 public class Morra {

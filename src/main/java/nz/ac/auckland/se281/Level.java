@@ -4,6 +4,6 @@ import java.util.List;
 
 public interface Level {
 
-  public int[] process(List<Integer> sumFIngers, int roundNumber);
+  public int[] process(List<Integer> playerFingerPlayed, int roundNumber);
 
 }
