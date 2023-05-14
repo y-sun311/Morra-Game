@@ -7,8 +7,8 @@ import nz.ac.auckland.se281.Main.Difficulty;
 public class Morra {
 
   private int roundNumber = 0;
-  public int fingerHuman;
-  public int sumHuman;
+  private int fingerHuman;
+  private int sumHuman;
   private String player;
   private String chosenLevel;
   private List<Integer> playerFinger = new ArrayList<Integer>();
@@ -121,7 +121,8 @@ public class Morra {
 
     MessageCli.PRINT_PLAYER_WINS.printMessage(player, String.valueOf(humanPoints),
         String.valueOf(pointsWin - humanPoints));
-    MessageCli.PRINT_PLAYER_WINS.printMessage("Jarvis", String.valueOf(aiPoints), String.valueOf(pointsWin - aiPoints));
+    MessageCli.PRINT_PLAYER_WINS.printMessage("Jarvis", String.valueOf(aiPoints),
+        String.valueOf(pointsWin - aiPoints));
 
   }
 }
