@@ -114,11 +114,12 @@ public class Morra {
   }
 
   public void showStats() {
+    // Print error message and return if the name hasn't started.
     if (gameStatus == 0) {
       MessageCli.GAME_NOT_STARTED.printMessage();
       return;
     }
-
+    // Print points to win for both player and Jarvis if the game has started.
     MessageCli.PRINT_PLAYER_WINS.printMessage(player, String.valueOf(humanPoints),
         String.valueOf(pointsWin - humanPoints));
     MessageCli.PRINT_PLAYER_WINS.printMessage("Jarvis", String.valueOf(aiPoints),
