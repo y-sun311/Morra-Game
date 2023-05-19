@@ -68,8 +68,6 @@ public class Morra {
           MessageCli.INVALID_INPUT.printMessage();
         }
         // Print error message if the user input is not a number.
-      } catch (NumberFormatException e) {
-        MessageCli.INVALID_INPUT.printMessage();
       } catch (Exception e) {
         MessageCli.INVALID_INPUT.printMessage();
       }
